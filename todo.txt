@@ -1,4 +1,0 @@
-TODO:
-
-- remove punctuation from starter words before they are added to the list/file
-- the rest of the project
