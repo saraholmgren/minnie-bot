@@ -1,4 +1,5 @@
 TODO:
 
 - remove punctuation from starter words before they are added to the list/file
+- add file validation for reading in and writing out
 - the rest of the project
