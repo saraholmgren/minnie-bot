@@ -33,7 +33,6 @@ def get(): #get words to write
     readsentence = input("input: ")
     low = readsentence.lower()
     h = re.sub("[^\w]", " ",  low).split()
-    print(type(h))
     try:
         for x in h:
             if x in words:
