@@ -6,11 +6,12 @@ words = []
 h = []
 ass = {}
 sentence_start = []
+writing = []
 
 def read_in(): #get words from external files
+    global file
+    global file_starters
     try:
-        global file
-        global file_starters
         file = open('words.txt','r+')
         filestr = file.read().split(" ")
         for x in filestr:
@@ -28,36 +29,31 @@ def read_in(): #get words from external files
         print(error)
 read_in()
 
-def get(): #get words to write
-    global sentence_start
-    readsentence = input("input: ")
-    low = readsentence.lower()
-    h = re.sub("[^\w]", " ",  low).split()
-    print(type(h))
+def appendfiles(): #get words to write
     try:
-        for x in h:
+        for x in writing:
             if x in words:
                 pass
             if x not in words:
                 words.append(x)
         words.pop(0)
         
-        s = h[0] # 's' <str>
+        s = writing[0] # 's' <str>
         ss = s.split(" ") # 'ss' <list>
         for x in ss:
-            if x in sentence_start:
+            if x in writing:
                 pass
             if x not in sentence_start:
                 sentence_start.append(x)
         sentence_start.pop(0)
     except BaseException as error:
         print(error)
-get()
 
 def writeout(): #write out any new words by .truncate() and overwrite existing file
     try:
         r = ''
         file = open('words.txt','r+')
+        print(words,'you are writing out this to words.txt')
         file.truncate()
         r = ' '.join(words)
         file.write(r)
@@ -65,13 +61,13 @@ def writeout(): #write out any new words by .truncate() and overwrite existing f
 
         k = ''
         file_starters = open('starters.txt','r+')
+        print(sentence_start,'you are writing out this to starters.txt')
         file_starters.truncate()
         k = ' '.join(sentence_start)
         file_starters.write(k)
         file_starters.close()
     except BaseException as error:
         print(error)
-writeout()
 
 def wordass(): #remove punctuation and append words into a dict of word associations
     try:
@@ -88,4 +84,11 @@ def wordass(): #remove punctuation and append words into a dict of word associat
     except BaseException as error:
         print(error)
     print(ass)
-wordass()
+
+def speak(getwords):
+    global writing
+    low = getwords.lower()
+    writing = re.sub("[^\w]", " ",  low).split()
+    appendfiles()
+    writeout()
+    wordass()
