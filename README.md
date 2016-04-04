@@ -1,2 +1,2 @@
-# i-am-fun
-source of my procrastination
+# tl;dr
+i gave up like,, 12 commits ago
